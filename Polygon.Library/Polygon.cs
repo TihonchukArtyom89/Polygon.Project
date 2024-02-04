@@ -4,19 +4,19 @@
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public Point(int? x=0,int? y=0)
+        public Point(int? x = 0, int? y = 0)
         {
             X = x ?? 0;
             Y = y ?? 0;
         }
     }
-    public abstract class Polygon //класс определения понятия многоугольник, вычисление площади многоугольник по формуле шнуровка гаусса (родительский класс для более конкретных фигур), определение выпуклости многоугольника, поле для длины массива
+    public abstract class Polygon //класс определения понятия многоугольник, вычисление площади многоугольник (родительский класс для более конкретных фигур), определение выпуклости многоугольника, поле для длины массива
     {
         public int Length { get; set; }
         public Point[] Points { get; set; }
         public Polygon(Point[]? points)
         {
-            if(points is not null)
+            if (points is not null)
             {
                 Length = points.Length;
                 Points = new Point[points.Length];
@@ -33,13 +33,12 @@
                 return true;
             }
             bool isConvex = false;
-            int n = Length;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < Length; i++)
             {
-                double dx1 = Points[(i + 2) % n].X - Points[(i + 1) % n].X;
-                double dy1 = Points[(i + 2) % n].Y - Points[(i + 1) % n].Y;
-                double dx2 = Points[i].X - Points[(i + 1) % n].X;
-                double dy2 = Points[i].Y - Points[(i + 1) % n].Y;
+                double dx1 = Points[(i + 2) % Length].X - Points[(i + 1) % Length].X;
+                double dy1 = Points[(i + 2) % Length].Y - Points[(i + 1) % Length].Y;
+                double dx2 = Points[i].X - Points[(i + 1) % Length].X;
+                double dy2 = Points[i].Y - Points[(i + 1) % Length].Y;
                 double zcrossproduct = dx1 * dy2 - dy1 * dx2;
                 if (i == 0)
                 {
@@ -52,10 +51,17 @@
             }
             return true;
         }
-        public double PolygonSquare()//вычисление площади многугольника
+        public double PolygonSquare()//вычисление площади многугольника по формуле шнуровка гаусса
         {
-            double polygonSquare=0;
-            //основной код здесь
+            double polygonSquare = 0;
+            for (int i = 0; i < Length; i++)
+            {
+                polygonSquare += Points[i].X * Points[i + 1].Y;
+            }
+            for (int i = Length - 1; i < 0; i++)
+            {
+                polygonSquare -= Points[i].X * Points[i - 1].Y;
+            }
             return polygonSquare;
         }
     }
