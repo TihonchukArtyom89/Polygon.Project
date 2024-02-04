@@ -13,18 +13,30 @@
     public abstract class Polygon //класс определения понятия многоугольник, вычисление площади многоугольник по формуле шнуровка гаусса (родительский класс для более конкретных фигур), определение выпуклости многоугольника, поле для длины массива
     {
         public int Length { get; set; }
-        public Point[]? points { get; set; }
+        public Point[] Points { get; set; }
         public Polygon(Point[]? points)
         {
-            if( points is not null )
+            if(points is not null)
             {
                 Length = points.Length;
-                points = new Point[points.Length];
+                Points = new Point[points.Length];
             }
             else
             {
                 throw new NullReferenceException("Не задан массив координат вершин многоугольника.");
             }
+        }
+        public bool IsConvex()//проверка многоугольника на выпуклость
+        {
+            bool convexFlag=false;
+            //основной код здесь
+            return convexFlag;
+        }
+        public double PolygonSquare()//вычисление площади многугольника
+        {
+            double polygonSquare=0;
+            //основной код здесь
+            return polygonSquare;
         }
     }
     public class Circle : Polygon//класс для вычисления площади круга (2*pi*r),массив вершин имеет длину в 1 элемент, поле для константы пи,поле для радиуса ,перегрузка метода вычисления площади 
