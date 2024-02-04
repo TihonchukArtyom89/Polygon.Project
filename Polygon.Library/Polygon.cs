@@ -28,9 +28,29 @@
         }
         public bool IsConvex()//проверка многоугольника на выпуклость
         {
-            bool convexFlag=false;
-            //основной код здесь
-            return convexFlag;
+            if (Length < 4)
+            {
+                return true;
+            }
+            bool isConvex = false;
+            int n = Length;
+            for (int i = 0; i < n; i++)
+            {
+                double dx1 = Points[(i + 2) % n].X - Points[(i + 1) % n].X;
+                double dy1 = Points[(i + 2) % n].Y - Points[(i + 1) % n].Y;
+                double dx2 = Points[i].X - Points[(i + 1) % n].X;
+                double dy2 = Points[i].Y - Points[(i + 1) % n].Y;
+                double zcrossproduct = dx1 * dy2 - dy1 * dx2;
+                if (i == 0)
+                {
+                    isConvex = zcrossproduct > 0;
+                }
+                else if (isConvex != (zcrossproduct > 0))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         public double PolygonSquare()//вычисление площади многугольника
         {
