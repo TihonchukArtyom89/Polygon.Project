@@ -68,9 +68,9 @@ public abstract class Polygon //класс определения понятия
 public class Circle : Polygon//класс для вычисления площади круга (pi*r^2), массив вершин имеет длину в 2 элемента (центр окружности и точка на окружности), поле для константы пи, перегрузка метода вычисления площади 
 {
     public const double PI = Math.PI;
-    public Circle(Point[]? points):base(points)
+    public Circle(Point[]? points) : base(points)
     {
-        if ((points is not null)&&(points.Length == 2))
+        if ((points is not null) && (points.Length == 2))
         {
             Points = points;
         }
@@ -95,7 +95,33 @@ public class Triangle : Polygon//класс для вычисления площ
         }
         else
         {
-            throw new NullReferenceException("Не заданы точки треугольни.");
+            throw new NullReferenceException("Не заданы точки треугольника.");
+        }
+    }
+    public bool IsRightTriangle()//проверка треугольника на то явлияется ли он прямоугольным
+    {
+        double[] sides =
+        [
+            Math.Sqrt(Math.Pow(Points[1].X - Points[0].X, 2) + Math.Pow(Points[1].Y - Points[0].Y, 2)),
+            Math.Sqrt(Math.Pow(Points[2].X - Points[0].X, 2) + Math.Pow(Points[2].Y - Points[0].Y, 2)),
+            Math.Sqrt(Math.Pow(Points[2].X - Points[1].X, 2) + Math.Pow(Points[2].Y - Points[1].Y, 2)),
+        ];
+        double max_side = sides.Max();
+        double sum_sides = 0;
+        foreach (double s in sides)
+        {
+            if (s != max_side)
+            {
+                sum_sides += s;
+            }
+        }
+        if (Math.Pow(max_side, 2) == Math.Pow(sum_sides, 2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
