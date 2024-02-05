@@ -68,16 +68,15 @@ public abstract class Polygon //класс определения понятия
 public class Circle : Polygon//класс для вычисления площади круга (pi*r^2), массив вершин имеет длину в 2 элемента (центр окружности и точка на окружности), поле для константы пи, перегрузка метода вычисления площади 
 {
     public const double PI = Math.PI;
-    public Circle(Point[]? points)
+    public Circle(Point[]? points):base(points)
     {
         if ((points is not null)&&(points.Length == 2))
         {
-            Points.Length = 2;
             Points = points;
         }
         else
         {
-            throw new NullReferenceException("Не задан/ы центр окружности и/или точка на окружности .");
+            throw new NullReferenceException("Не задан/ы или не верно задан/ы центр окружности и/или точка на окружности .");
         }
     }
     public override double PolygonSquare()// вычисление площади по формуле pi*r^2
@@ -88,5 +87,15 @@ public class Circle : Polygon//класс для вычисления площа
 }
 public class Triangle : Polygon//класс для вычисления площади (ф-ла из класса Polygon),массив вершин имеет длину в 3 элемента, проверка треугольника на прямоугольность
 {
-
+    public Triangle(Point[]? points) : base(points)
+    {
+        if ((points is not null) && (points.Length == 3))
+        {
+            Points = points;
+        }
+        else
+        {
+            throw new NullReferenceException("Не заданы точки треугольни.");
+        }
+    }
 }
