@@ -81,7 +81,7 @@ public class Circle : Polygon//класс для вычисления площа
     }
     public override double PolygonSquare()// вычисление площади по формуле pi*r^2
     {
-        double polygonSquare = 2 * PI * Math.Pow(Math.Sqrt(Math.Pow(Points[1].X - Points[0].X, 2) + Math.Pow(Points[1].Y - Points[0].Y, 2)), 2);
+        double polygonSquare =  PI * Math.Pow(Math.Sqrt(Math.Pow(Points[1].X - Points[0].X, 2) + Math.Pow(Points[1].Y - Points[0].Y, 2)), 2);
         return polygonSquare;
     }
 }
@@ -98,7 +98,7 @@ public class Triangle : Polygon//класс для вычисления площ
             throw new NullReferenceException("Не заданы точки треугольника.");
         }
     }
-    public bool IsRightTriangle()//проверка треугольника на то явлияется ли он прямоугольным
+    public bool IsRightTriangle()//проверка треугольника на то является ли он прямоугольным
     {
         double[] sides =
         [
