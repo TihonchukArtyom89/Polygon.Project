@@ -59,22 +59,14 @@ public abstract class Polygon //класс определения понятия
         Point[] _points = Points;
         Array.Resize(ref _points, _points.Length + 1);
         _points[_points.Length - 1] = Points[0];
-        Console.WriteLine("Length " + _points.Length);
-        Console.WriteLine("s1");
         for (i = 0; i < _points.Length - 1; i++)
         {
-            Console.WriteLine("s1 i = " + i + "res = " + _points[i].X * _points[i + 1].Y);
             s1 += _points[i].X * _points[i + 1].Y;
         }
-        Console.WriteLine("s1 "+s1+"s2");
-        Console.WriteLine("Length " + _points.Length);
         for (i = _points.Length - 1; i > 0; i--)
         {
-            Console.WriteLine("s2 i = " + i + "res = " + _points[i].X * _points[i - 1].Y);
             s2 += _points[i].X * _points[i - 1].Y;
         }
-
-        Console.WriteLine("s1 " + s1 + " s2 " + s2);
         polygonSquare = Math.Abs(s1 - s2);
         return polygonSquare / 2;
     }
