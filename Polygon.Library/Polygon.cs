@@ -54,15 +54,29 @@ public abstract class Polygon //класс определения понятия
     public virtual double PolygonSquare()//вычисление площади многугольника по формуле шнуровка гаусса
     {
         double polygonSquare = 0;
-        for (int i = 0; i < Length; i++)
+        double s1 = 0, s2 = 0;
+        int i;
+        Point[] _points = Points;
+        Array.Resize(ref _points, _points.Length + 1);
+        _points[_points.Length - 1] = Points[0];
+        Console.WriteLine("Length " + _points.Length);
+        Console.WriteLine("s1");
+        for (i = 0; i < _points.Length - 1; i++)
         {
-            polygonSquare += Points[i].X * Points[i + 1].Y;
+            Console.WriteLine("s1 i = " + i + "res = " + _points[i].X * _points[i + 1].Y);
+            s1 += _points[i].X * _points[i + 1].Y;
         }
-        for (int i = Length - 1; i < 0; i++)
+        Console.WriteLine("s1 "+s1+"s2");
+        Console.WriteLine("Length " + _points.Length);
+        for (i = _points.Length - 1; i > 0; i--)
         {
-            polygonSquare -= Points[i].X * Points[i - 1].Y;
+            Console.WriteLine("s2 i = " + i + "res = " + _points[i].X * _points[i - 1].Y);
+            s2 += _points[i].X * _points[i - 1].Y;
         }
-        return polygonSquare;
+
+        Console.WriteLine("s1 " + s1 + " s2 " + s2);
+        polygonSquare = Math.Abs(s1 - s2);
+        return polygonSquare / 2;
     }
 }
 public class Circle : Polygon//класс для вычисления площади круга (pi*r^2), массив вершин имеет длину в 2 элемента (центр окружности и точка на окружности), поле для константы пи, перегрузка метода вычисления площади 
@@ -81,7 +95,7 @@ public class Circle : Polygon//класс для вычисления площа
     }
     public override double PolygonSquare()// вычисление площади по формуле pi*r^2
     {
-        double polygonSquare =  PI * Math.Pow(Math.Sqrt(Math.Pow(Points[1].X - Points[0].X, 2) + Math.Pow(Points[1].Y - Points[0].Y, 2)), 2);
+        double polygonSquare = PI * Math.Pow(Math.Sqrt(Math.Pow(Points[1].X - Points[0].X, 2) + Math.Pow(Points[1].Y - Points[0].Y, 2)), 2);
         return polygonSquare;
     }
 }
