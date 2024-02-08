@@ -118,10 +118,10 @@ public class Triangle : Polygon//класс для вычисления площ
         {
             if (s != max_side)
             {
-                sum_sides += s;
+                sum_sides += s*s;
             }
         }
-        if (Math.Pow(max_side, 2) == Math.Pow(sum_sides, 2))
+        if (Math.Round(max_side * max_side,2) == sum_sides)
         {
             return true;
         }
