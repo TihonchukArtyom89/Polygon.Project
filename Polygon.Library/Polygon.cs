@@ -54,20 +54,19 @@ public abstract class Polygon //класс определения понятия
     public virtual double PolygonSquare()//вычисление площади многугольника по формуле шнуровка гаусса
     {
         double polygonSquare = 0;
-        double s1 = 0, s2 = 0;
         int i;
         Point[] _points = Points;
         Array.Resize(ref _points, _points.Length + 1);
         _points[_points.Length - 1] = Points[0];
         for (i = 0; i < _points.Length - 1; i++)
         {
-            s1 += _points[i].X * _points[i + 1].Y;
+            polygonSquare += _points[i].X * _points[i + 1].Y;
         }
         for (i = _points.Length - 1; i > 0; i--)
         {
-            s2 += _points[i].X * _points[i - 1].Y;
+            polygonSquare -= _points[i].X * _points[i - 1].Y;
         }
-        polygonSquare = Math.Abs(s1 - s2);
+        polygonSquare = Math.Abs(polygonSquare);
         return polygonSquare / 2;
     }
 }
